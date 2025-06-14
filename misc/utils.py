@@ -21,7 +21,7 @@ def is_number(s: str) -> bool:
 def input_number(
         left_limit: int | float = -float('inf'),
         right_limit: int | float = float('inf'),
-        welcome: str = "Пожалуйста, введите число целое число: "
+        welcome: str = "Пожалуйста, введите число: "
 ) -> int | float:
     """
     Запрашивает у пользолвателя числа до тех пор, пока ввод не удовлетворит условию.
