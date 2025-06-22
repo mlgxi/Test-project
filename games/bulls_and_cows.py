@@ -5,16 +5,16 @@ class BullGame:
     def __init__(self, numbers_count):
         self.game = True
         self.numbers_count = int(numbers_count)
-        self.number_sequence = []
+        self.guessed_sequence = []
         self.user_sequence = []
         self.tries_results = ["\nВаши попытки:"]
         self.tries_count = 0
         self.rules = 'В игре "Быки и коровы" ваша задача разгадать последовательность из нескольких цифр.\nЗа каждую угаданную цифру, стоящую на своём месте, вы получите быка.\nЗа каждую угаданную цифру, стоящую на другом месте, вы получите корову.\nВ последовательности нет двух одинаковых цифр.\nПопробуйте разгадать всю последовательность за минимальное число попыток.'
 
-    def _create_number_sequence(self):
+    def _create_sequence(self):
         """Загадывает случайную последовательность цифр для игры"""
         from random import sample
-        self.number_sequence = sample("0123456789", self.numbers_count)
+        self.guessed_sequence = sample("0123456789", self.numbers_count)
 
     def _input_user_sequence(self):
         """Обрабатывает ввод пользовательской последовательности"""
@@ -66,17 +66,17 @@ class BullGame:
            ||    (__) Поздравляю! Му-у!
            ||w--||     \|/
        \|/        """)
-        print(f"Вы разгадали все цифры за {self.tries_count} попыт{ends(self.tries_count)}")
+        print(f'Вы разгадали "{"".join(self.guessed_sequence).upper()}" за {self.tries_count} попыт{ends(self.tries_count)}')
 
     def run(self):
-        self._create_number_sequence()
+        self._create_sequence()
         clear()
         print(self.rules)
         while self.game:
             print(*(result for result in self.tries_results if len(self.tries_results) > 1), sep="\n")
             print()
             self.user_sequence = self._input_user_sequence()
-            self._compare_sequences(self.user_sequence, self.number_sequence)
+            self._compare_sequences(self.user_sequence, self.guessed_sequence)
             clear()
         self._congratulation()
 
@@ -94,7 +94,7 @@ def start():
     print(
         'В этой игре вам надо разгадать числовую последовательность за минимальное количество попыток. Чем длиннее последовательность, тем сложнее её восстановить.')
     while True:
-        numbers_count = input_number(5, 10, 'Сколько цифр вы хотите отгадать? (5-10): ')
+        numbers_count = input_number(3, 10, 'Сколько цифр вы хотите отгадать? (3-10): ')
         bg = BullGame(numbers_count)
         bg.run()
         while True:
