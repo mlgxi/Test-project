@@ -2,9 +2,9 @@ from misc.utils import clear, input_number
 
 
 class BullGame:
-    def __init__(self, numbers_count):
+    def __init__(self, sequence_length):
         self.game = True
-        self.numbers_count = int(numbers_count)
+        self.sequence_length = int(sequence_length)
         self.guessed_sequence = []
         self.user_sequence = []
         self.tries_results = ["\nВаши попытки:"]
@@ -14,22 +14,22 @@ class BullGame:
     def _create_sequence(self):
         """Загадывает случайную последовательность цифр для игры"""
         from random import sample
-        self.guessed_sequence = sample("0123456789", self.numbers_count)
+        self.guessed_sequence = sample("0123456789", self.sequence_length)
 
     def _input_user_sequence(self):
         """Обрабатывает ввод пользовательской последовательности"""
-        # print(self.number_sequence) # Для программиста-тугодума, который не может пройти собственную игру
-        print(f"Введите {self.numbers_count} разных цифр: ", end="")
+        # print(self.guessed_sequence) # Для программиста-тугодума, который не может пройти собственную игру
+        print(f"Введите {self.sequence_length} разных цифр: ", end="")
         while True:
             user_input = input()
             if user_input.isdigit():
-                if len(user_input) == self.numbers_count:
+                if len(user_input) == self.sequence_length:
                     if len(set(user_input)) == len(user_input):
                         return list(user_input)
                     else:
                         print("Все цифры должны быть разные: ", end="")
                 else:
-                    print(f"Ровно {self.numbers_count} цифр: ", end="")
+                    print(f"Ровно {self.sequence_length} цифр: ", end="")
             else:
                 print("Только цифры: ", end="")
 
@@ -41,14 +41,14 @@ class BullGame:
             "bulls": ["ов", ""] + ["а"] * 3 + ["ов"] * 5,
             "cows": ["ов", "ова"] + ["овы"] * 3 + ["ов"] * 5
         }
-        for i in range(self.numbers_count):
+        for i in range(self.sequence_length):
             if user_sequence[i] == number_sequence[i]:
                 bulls += 1
             elif user_sequence[i] in number_sequence:
                 cows += 1
-        round_result = f"{self.tries_count}) {" ".join(user_sequence)} - {bulls} бык{ends['bulls'][bulls]} и {cows} кор{ends['cows'][cows]}"
+        round_result = f"{self.tries_count}) {" ".join(user_sequence).upper()} - {bulls} бык{ends['bulls'][bulls]} и {cows} кор{ends['cows'][cows]}"
         self.tries_results.append(round_result)
-        if bulls == self.numbers_count:
+        if bulls == self.sequence_length:
             self.game = False
 
     def _congratulation(self):
@@ -99,8 +99,8 @@ def start():
         bg.run()
         while True:
             next_game = input("Ещё партию? (y/n): ").lower()
-            if next_game == "y":
+            if next_game in ("y","н","yes","да"):
                 break
-            elif next_game == "n":
+            elif next_game in ("n","т","no","нет"):
                 print("Спасибо за игру!")
                 exit(0)
