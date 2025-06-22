@@ -1,4 +1,4 @@
-from misc.utils import clear, input_number
+from misc.utils import clear, input_number,next_game
 
 
 class BullGame:
@@ -97,10 +97,4 @@ def start():
         numbers_count = input_number(3, 10, 'Сколько цифр вы хотите отгадать? (3-10): ')
         bg = BullGame(numbers_count)
         bg.run()
-        while True:
-            next_game = input("Ещё партию? (y/n): ").lower()
-            if next_game in ("y","н","yes","да"):
-                break
-            elif next_game in ("n","т","no","нет"):
-                print("Спасибо за игру!")
-                exit(0)
+        next_game()

@@ -45,3 +45,14 @@ def input_number(
             if left_limit <= number <= right_limit:
                 return number
         print(f'\nВведите число между {left_limit} и {right_limit}')
+
+
+def next_game():
+    """Спрашивает пользователя, хочет ли он ещё партию"""
+    while True:
+        ng = input("Ещё партию? (y/n): ").lower()
+        if ng in ("y", "н", "yes", "да"):
+            break
+        elif ng in ("n", "т", "no", "нет"):
+            print("Спасибо за игру!")
+            exit(0)

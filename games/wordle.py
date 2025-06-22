@@ -1,4 +1,4 @@
-from misc.utils import clear, input_number
+from misc.utils import clear, input_number, next_game
 from games.bulls_and_cows import BullGame
 
 
@@ -81,10 +81,4 @@ def start():
         word_length = input_number(5, 7, 'Какой длины слово хотите отгадать? (5-7): ')
         wg = Wordle(word_length)
         wg.run()
-        while True:
-            next_game = input("Ещё партию? (y/n): ").lower()
-            if next_game in ("y","н","yes","да"):
-                break
-            elif next_game in ("n","т","no","нет"):
-                print("Спасибо за игру!")
-                exit(0)
+        next_game()
