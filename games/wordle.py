@@ -14,7 +14,6 @@ class Wordle(BullGame):
 
     def _create_sequence(self):
         """Выбирает случайное слово нужной длины для игры"""
-        from random import sample
         self.guessed_sequence = self._get_word_from_db(self.sequence_length)
 
     def _get_word_from_db(self, word_length, lang='rus'):
